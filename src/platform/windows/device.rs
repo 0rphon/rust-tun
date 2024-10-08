@@ -72,6 +72,10 @@ impl Device {
     ) -> Poll<io::Result<usize>> {
         Pin::new(&mut self.queue).poll_read(cx, buf)
     }
+
+    pub fn try_read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
+        self.queue.try_read(buf)
+    }
 }
 
 impl Read for Device {
